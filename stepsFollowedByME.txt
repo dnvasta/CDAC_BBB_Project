@@ -1,0 +1,21 @@
+##This steps are for can-utils##
+1) In order to set up a virtual CAN vcan0
+	$ sudo ip link add dev vcan0 type vcan
+	$ sudo ip link set vcan0 up 			//enable vcan0
+	$ sudo ip link set vcan0 down 			//disable vcan0
+
+2) In order to check the BB-overlay for the BBB running on kernel 4.4.68
+	$ cat /sys/devices/platform/bone_capemgr/slots
+	
+3) To add a new device use:
+	$ sudo sh -c "echo 'BB-DCAN1' > /sys/devices/platform/bone_capemgr/slots"
+
+4) To remove an existing one...First do check check the devices available
+	$ cat /sys/devices/platform/bone_capemgr/slots
+	
+	$ sudo sh -c "echo '-4' > /sys/devices/platform/bone_capemgr/slots"
+
+5) To set up a real can0 interface & bus speed
+	$ sudo ip link set can0 up type can bitrate 500000
+	$ ifconfig can0 up
+
